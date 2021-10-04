@@ -5,12 +5,13 @@ import (
 	"os"
 )
 
-type AppInterface interface {
+type appInterface interface {
 	AddCommand(name string, command Command)
 	Run() error
 }
 
-func NewApp(defaultCommand Command) AppInterface {
+//NewApp creates a cli app with a provided default command
+func NewApp(defaultCommand Command) *App {
 	app := &App{
 		commands: map[string]Command{
 			"version": &VersionCommand{},
@@ -20,14 +21,19 @@ func NewApp(defaultCommand Command) AppInterface {
 	return app
 }
 
+//App basic structure for managing a cli
 type App struct {
 	commands map[string]Command
 }
 
+//AddCommand adds a command to the cli with a given command name
 func (a *App) AddCommand(name string, command Command) {
 	a.commands[name] = command
 }
 
+//Run executes any command associated with the first argument passed to the application (after the application name itself)
+//If no argument is passed it will use the default command
+//If no command can be determined based on the argument or default, this will return an error saying that no command could be found
 func (a *App) Run() error {
 	if len(os.Args) > 1 {
 		cmd, ok := a.commands[os.Args[1]]

@@ -8,3 +8,4 @@
 [![Coverage Status](https://coveralls.io/repos/github/LucasCarioca/gocli/badge.svg?branch=main)](https://coveralls.io/github/LucasCarioca/gocli?branch=main)
 [![Go Report Card](https://goreportcard.com/badge/github.com/LucasCarioca/gocli)](https://goreportcard.com/report/github.com/LucasCarioca/gocli)
 
+[![DeepSource](https://deepsource.io/gh/LucasCarioca/gocli.svg/?label=active+issues&show_trend=true&token=z8O_Knm5SXRE-QTR3IVRiOrP)](https://deepsource.io/gh/LucasCarioca/gocli/?ref=repository-badge)
