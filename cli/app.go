@@ -27,12 +27,14 @@ func (a *App) AddCommand(name string, command Command) {
 }
 
 func (a *App) Run() error {
-	cmd, ok := a.commands[os.Args[1]]
-	if ok {
-		return cmd.Run()
+	if len(os.Args) > 1 {
+		cmd, ok := a.commands[os.Args[1]]
+		if ok {
+			return cmd.Run()
+		}
 	}
 
-	cmd, ok = a.commands["default"]
+	cmd, ok := a.commands["default"]
 	if ok {
 		return cmd.Run()
 	}
