@@ -5,13 +5,14 @@ import (
 	"os"
 )
 
-type appInterface interface {
+//AppInterface basic interface for GoCLI cli applications
+type AppInterface interface {
 	AddCommand(name string, command Command)
 	Run() error
 }
 
 //NewApp creates a cli app with a provided default command
-func NewApp(defaultCommand Command) *App {
+func NewApp(defaultCommand Command) AppInterface {
 	app := &App{
 		commands: map[string]Command{
 			"version": &VersionCommand{},
