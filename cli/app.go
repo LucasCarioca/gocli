@@ -11,7 +11,9 @@ type AppInterface interface {
 }
 
 func NewApp(defaultCommand Command) AppInterface {
-	app := &App{}
+	app := &App{
+		commands: map[string]Command{},
+	}
 	app.AddCommand("default", defaultCommand)
 	return app
 }
