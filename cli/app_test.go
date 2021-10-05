@@ -46,7 +46,7 @@ func Test_app(t *testing.T) {
 		err := app.Run()
 		expectedError := "could not find command"
 		assert.NotNil(t, app, "Should return a proper app")
- 		assert.NotNil(t, err, "Should return an error")
+		assert.NotNil(t, err, "Should return an error")
 		assert.Equalf(t, expectedError, err.Error(), "Should return the proper error message")
 	})
 
