@@ -41,6 +41,15 @@ func Test_app(t *testing.T) {
 		assert.Equalf(t, 0, cmd.getCalls(), "Should not have executed default command")
 	})
 
+	t.Run("Should create an app without a default command and throw an error when called", func(t *testing.T) {
+		app := App{}
+		err := app.Run()
+		expectedError := "could not find command"
+		assert.NotNil(t, app, "Should return a proper app")
+ 		assert.NotNil(t, err, "Should return an error")
+		assert.Equalf(t, expectedError, err.Error(), "Should return the proper error message")
+	})
+
 	t.Run("Should call default command if run without arguments", func(t *testing.T) {
 		app := NewApp(&cmd)
 		cmd.resetCalls()
