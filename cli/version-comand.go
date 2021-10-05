@@ -1,14 +1,21 @@
 package cli
 
-import "fmt"
+import (
+	"fmt"
+	"io"
+	"os"
+)
+var (
+	customOut io.Writer = os.Stdout
+)
 
 //VersionCommand used to retrieve the current version of the terraform cli
 type VersionCommand struct {
 	Version string
 }
 
-//Run run the command
+//Run executes the command
 func (c *VersionCommand) Run() error {
-	fmt.Printf("Current version: v%s\n", c.Version)
+	fmt.Fprintf(customOut,"Current version: v%s\n", c.Version)
 	return nil
 }
