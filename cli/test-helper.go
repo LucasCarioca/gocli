@@ -7,5 +7,5 @@ import (
 
 //MockCLICall mock arguments passed to the CLI for tests
 func MockCLICall(cmd string) {
-	os.Args = strings.SplitAfter(cmd, " ")
+	os.Args = strings.Split(cmd, " ")
 }
