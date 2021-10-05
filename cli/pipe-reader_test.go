@@ -3,7 +3,6 @@ package cli
 import (
 	"github.com/stretchr/testify/assert"
 	"io/ioutil"
-	"log"
 	"os"
 	"testing"
 )
@@ -11,7 +10,7 @@ import (
 func Test_pipe_reader(t *testing.T) {
 	temporaryFile, err := ioutil.TempFile("", "example")
 	if err != nil {
-		log.Fatal(err)
+		assert.FailNow(t, err.Error())
 	}
 	oldStdin := os.Stdin
 	os.Stdin = temporaryFile
@@ -21,10 +20,10 @@ func Test_pipe_reader(t *testing.T) {
 	}()
 	setPipeContent := func(content string) {
 		if _, err := temporaryFile.Write([]byte(content)); err != nil {
-			log.Fatal(err)
+			assert.FailNow(t, err.Error())
 		}
 		if _, err := temporaryFile.Seek(0, 0); err != nil {
-			log.Fatal(err)
+			assert.FailNow(t, err.Error())
 		}
 	}
 
