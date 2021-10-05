@@ -11,7 +11,7 @@ import (
 func ReadPipe() (string, error) {
 	info, err := os.Stdin.Stat()
 	if err != nil {
-		panic(err)
+		return "", err
 	}
 
 	if info.Mode()&os.ModeCharDevice != 0 || info.Size() <= 0 {

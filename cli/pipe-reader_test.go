@@ -45,3 +45,21 @@ func Test_pipe_reader_errors(t *testing.T) {
 		assert.Equal(t, "", s, "Should return an empty string")
 	})
 }
+
+func Test_pipe_reader_file_errors(t *testing.T) {
+
+	os.Stdin = nil
+	defer func() {
+		oldStdin := os.Stdin
+		os.Stdin = oldStdin
+	}()
+
+	t.Run("Should support reading piped input", func(t *testing.T) {
+		s, err := ReadPipe()
+		expectedError := "invalid argument"
+		assert.NotNil(t, err, "Should not throw an error")
+		assert.Equal(t, expectedError, err.Error(), "Should return the proper error")
+		assert.Equal(t, "", s, "Should return an empty string")
+	})
+
+}
