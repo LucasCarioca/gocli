@@ -5,6 +5,7 @@ import (
 	"io"
 	"os"
 )
+
 var (
 	customOut io.Writer = os.Stdout
 )
@@ -16,6 +17,6 @@ type VersionCommand struct {
 
 //Run executes the command
 func (c *VersionCommand) Run() error {
-	fmt.Fprintf(customOut,"Current version: v%s\n", c.Version)
+	fmt.Fprintf(customOut, "Current version: v%s\n", c.Version)
 	return nil
 }
