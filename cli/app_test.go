@@ -5,8 +5,8 @@ import (
 	"testing"
 )
 
-type mockCmd struct{
-	calls int
+type mockCmd struct {
+	calls     int
 	mockError error
 }
 
@@ -15,11 +15,11 @@ func newMockCmd() mockCmd {
 }
 
 func (c *mockCmd) Run() error {
-	c.calls = c.calls+1
+	c.calls = c.calls + 1
 	return c.mockError
 }
 
-func (c *mockCmd) resetCalls(){
+func (c *mockCmd) resetCalls() {
 	c.calls = 0
 }
 
