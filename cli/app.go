@@ -7,12 +7,12 @@ import (
 
 //AppInterface basic interface for GoCLI cli applications
 type AppInterface interface {
-	AddCommand(name string, command Command)
+	AddCommand(name string, command interface{})
 	Run() error
 }
 
 //NewApp creates a cli app with a provided default command
-func NewApp(defaultCommand Command) AppInterface {
+func NewApp(defaultCommand interface{}) AppInterface {
 	app := &App{
 		commands: map[string]Command{
 			"version": &VersionCommand{},
@@ -28,11 +28,19 @@ type App struct {
 }
 
 //AddCommand adds a command to the cli with a given command name
-func (a *App) AddCommand(name string, command Command) {
+//can handle both regular commands (Command type) or functional commands (FunctionalCommand type)
+func (a *App) AddCommand(name string, command interface{}) {
 	if a.commands == nil {
 		a.commands = make(map[string]Command)
 	}
-	a.commands[name] = command
+	switch c := command.(type) {
+	default:
+		break
+	case Command:
+		a.commands[name] = c
+	case func() error:
+		a.commands[name] = &FunctionalCommandWrapper{c}
+	}
 }
 
 //Run executes any command associated with the first argument passed to the application (after the application name itself)

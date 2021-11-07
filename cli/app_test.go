@@ -76,4 +76,25 @@ func Test_app(t *testing.T) {
 		assert.Equalf(t, 0, cmd.getCalls(), "Should not have executed default command")
 		assert.Equalf(t, 1, newCmd.getCalls(), "Should have executed test command")
 	})
+
+	t.Run("Should support functional commands", func(t *testing.T) {
+		functionalCommand := func() error {
+			cmd.Run()
+			return nil
+		}
+		app := NewApp(functionalCommand)
+		app.AddCommand("test", functionalCommand)
+		cmd.resetCalls()
+		cmd.setError(nil)
+		assert.NotNil(t, app, "Should return a proper app")
+		assert.Equalf(t, 0, cmd.getCalls(), "Should not have executed the command")
+		MockCLICall("app")
+		app.Run()
+		assert.Equalf(t, 1, cmd.getCalls(), "Should have executed the command")
+		cmd.resetCalls()
+		assert.Equalf(t, 0, cmd.getCalls(), "Should not have executed the command")
+		MockCLICall("app test")
+		app.Run()
+		assert.Equalf(t, 1, cmd.getCalls(), "Should have executed the command")
+	})
 }
