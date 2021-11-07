@@ -60,7 +60,7 @@ func main() {
 you can now validate that your cli is working
 
 ```shell
-go build main.go -o mycli
+go build new-app-func.go -o mycli
 mycli hello
 # You should then get the output "Hello World"
 ```
@@ -80,7 +80,7 @@ func main() {
 Let's test it again
 
 ```shell
-go build main.go -o mycli
+go build new-app-func.go -o mycli
 mycli
 # You should then get the output "Hello World"
 ```
