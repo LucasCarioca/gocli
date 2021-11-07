@@ -60,7 +60,7 @@ func main() {
 you can now validate that your cli is working
 
 ```shell
-go build new-app-func.go -o mycli
+go build main.go -o mycli
 mycli hello
 # You should then get the output "Hello World"
 ```
@@ -80,7 +80,34 @@ func main() {
 Let's test it again
 
 ```shell
-go build new-app-func.go -o mycli
+go build main.go -o mycli
 mycli
 # You should then get the output "Hello World"
+```
+
+You can also create commands even easier by creating `FunctionalCommands`.
+
+```go
+import "github.com/LucasCarioca/gocli/cli"
+
+func main() {
+    app := &cli.NewApp(func() error {
+        fmt.Println("this is a simple functional command")    	
+    })
+
+    app.AddCommand("another", func() error {
+        fmt.Println("this is another simple functional command")
+	})
+    app.Run()
+}
+```
+
+Let's test it again
+
+```shell
+go build main.go -o mycli
+mycli
+# You should then get the output "this is a simple functional command"
+mycli another 
+# You should then get the output "this is another simple functional command"
 ```
