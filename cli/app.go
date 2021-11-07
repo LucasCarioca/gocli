@@ -34,8 +34,6 @@ func (a *App) AddCommand(name string, command interface{}) {
 		a.commands = make(map[string]Command)
 	}
 	switch c := command.(type) {
-	default:
-		break
 	case Command:
 		a.commands[name] = c
 	case func() error:
