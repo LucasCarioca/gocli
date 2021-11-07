@@ -30,7 +30,7 @@ They require only one method which is the `Run` method and serves as the entry p
 
 ```go
 type Command interface {
-Run() error
+    Run() error
 }
 ```
 
