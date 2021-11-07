@@ -5,14 +5,13 @@ import (
 	"github.com/LucasCarioca/gocli/cli"
 )
 
-type simpleCommand struct {}
+type simpleCommand struct{}
 
 //Run command to run
 func (*simpleCommand) Run() error {
 	fmt.Println("Hello World")
 	return nil
 }
-
 
 func main() {
 	app := &cli.App{}

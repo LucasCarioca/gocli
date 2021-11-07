@@ -5,14 +5,13 @@ import (
 	"github.com/LucasCarioca/gocli/cli"
 )
 
-type defaultCommand struct {}
+type defaultCommand struct{}
 
 //Run command to run
 func (*defaultCommand) Run() error {
 	fmt.Println("This is the default command")
 	return nil
 }
-
 
 func main() {
 	app := cli.NewApp(&defaultCommand{})
