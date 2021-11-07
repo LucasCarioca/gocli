@@ -29,6 +29,9 @@ type App struct {
 
 //AddCommand adds a command to the cli with a given command name
 func (a *App) AddCommand(name string, command Command) {
+	if a.commands == nil {
+		a.commands = make(map[string]Command)
+	}
 	a.commands[name] = command
 }
 

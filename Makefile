@@ -1,7 +1,7 @@
 .PHONY := all
 
 test:
-	go test ./... -v -covermode=count -coverprofile=coverage.out
+	go test ./cli/... -v -covermode=count -coverprofile=coverage.out
 
 lint:
 	golint ./...
