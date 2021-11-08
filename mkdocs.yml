@@ -11,3 +11,5 @@ markdown_extensions:
   - pymdownx.snippets
   - attr_list
   - md_in_html
+docs_dir: docs-src
+site_dir: docs
