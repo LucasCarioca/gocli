@@ -2,7 +2,7 @@
   "name": "gocli",
   "version": "0.3.0",
   "scripts": {
-    "release": ""
+    "release": "semantic-release"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.0",
