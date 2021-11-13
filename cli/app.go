@@ -68,10 +68,8 @@ func (a *App) Run() error {
 			}
 		}
 		return nil
-	} else {
-		return errors.New("could not find command")
 	}
-
+	return errors.New("could not find command")
 }
 
 func (a *App) findCommand() interface{} {
