@@ -1,35 +1,10 @@
 package cli
 
 import (
+	"errors"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
-
-type mockCmd struct {
-	calls     int
-	mockError error
-}
-
-func newMockCmd() mockCmd {
-	return mockCmd{calls: 0, mockError: nil}
-}
-
-func (c *mockCmd) Run() error {
-	c.calls = c.calls + 1
-	return c.mockError
-}
-
-func (c *mockCmd) resetCalls() {
-	c.calls = 0
-}
-
-func (c *mockCmd) getCalls() int {
-	return c.calls
-}
-
-func (c *mockCmd) setError(mockError error) {
-	c.mockError = mockError
-}
 
 func Test_app(t *testing.T) {
 	cmd := newMockCmd()
@@ -58,6 +33,43 @@ func Test_app(t *testing.T) {
 		assert.Equalf(t, 0, cmd.getCalls(), "Should not have executed default command")
 		app.Run()
 		assert.Equalf(t, 1, cmd.getCalls(), "Should have executed default command")
+	})
+
+	t.Run("Should call command and all the lifecycle hooks", func(t *testing.T) {
+		fullCmd := newMockCmdFull()
+		app := NewApp(&fullCmd)
+		commandCalls, setupCalls, teardownCalls := fullCmd.getCalls()
+		assert.NotNil(t, app, "Should return a proper app")
+		assert.Equalf(t, 0, commandCalls, "Should not have executed default command")
+		assert.Equalf(t, 0, setupCalls, "Should not have executed setup")
+		assert.Equalf(t, 0, teardownCalls, "Should not have executed teardown")
+		app.Run()
+		commandCalls, setupCalls, teardownCalls = fullCmd.getCalls()
+		assert.Equalf(t, 1, commandCalls, "Should have executed default command")
+		assert.Equalf(t, 1, commandCalls, "Should have executed setup")
+		assert.Equalf(t, 1, commandCalls, "Should have executed teardown")
+	})
+
+	t.Run("Should throw an error in the setup", func(t *testing.T) {
+		fullCmd := newMockCmdFull()
+		app := NewApp(&fullCmd)
+		expectedError := "setup"
+		fullCmd.setError(nil, errors.New(expectedError), nil)
+		err := app.Run()
+		assert.NotNil(t, app, "Should return a proper app")
+		assert.NotNil(t, err, "Should return an error")
+		assert.Equalf(t, expectedError, err.Error(), "Should return the proper error message")
+	})
+
+	t.Run("Should throw an error in the teardown", func(t *testing.T) {
+		fullCmd := newMockCmdFull()
+		app := NewApp(&fullCmd)
+		expectedError := "teardown"
+		fullCmd.setError(nil, nil, errors.New(expectedError))
+		err := app.Run()
+		assert.NotNil(t, app, "Should return a proper app")
+		assert.NotNil(t, err, "Should return an error")
+		assert.Equalf(t, expectedError, err.Error(), "Should return the proper error message")
 	})
 
 	t.Run("Should run the proper command based on the command line arguments", func(t *testing.T) {

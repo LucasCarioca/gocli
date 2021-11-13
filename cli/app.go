@@ -45,37 +45,45 @@ func (a *App) AddCommand(name string, command interface{}) {
 //If no argument is passed it will use the default command
 //If no command can be determined based on the argument or default, this will return an error saying that no command could be found
 func (a *App) Run() error {
-	if len(os.Args) > 1 {
-		cmd, ok := a.commands[os.Args[1]]
+	cmd, ok := a.findCommand().(Command)
+	if ok {
+		s, ok := cmd.(CommandSetup)
 		if ok {
-			s, ok := cmd.(CommandSetup)
-			if ok {
-				err := s.Setup()
-				if err != nil {
-					return err
-				}
-			}
-
-			err := cmd.Run()
+			err := s.Setup()
 			if err != nil {
 				return err
 			}
+		}
 
-			t, ok := cmd.(CommandTeardown)
-			if ok {
-				err := t.Teardown()
-				if err != nil {
-					return err
-				}
+		err := cmd.Run()
+		if err != nil {
+			return err
+		}
+
+		t, ok := cmd.(CommandTeardown)
+		if ok {
+			err := t.Teardown()
+			if err != nil {
+				return err
 			}
 		}
 		return nil
+	} else {
+		return errors.New("could not find command")
 	}
 
+}
+
+func (a *App) findCommand() interface{} {
+	if len(os.Args) > 1 {
+		cmd, ok := a.commands[os.Args[1]]
+		if ok {
+			return cmd
+		}
+	}
 	cmd, ok := a.commands["default"]
 	if ok {
-		return cmd.Run()
+		return cmd
 	}
-
-	return errors.New("could not find command")
+	return nil
 }
