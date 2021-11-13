@@ -67,11 +67,11 @@ func (c *mockCmdFull) resetCalls() {
 	c.teardownCalls = 0
 }
 
-func (c *mockCmdFull) getCalls() (commandCalls int, setupCalls int, teardownCalls int) {
+func (c *mockCmdFull) getCalls() (commandCalls, setupCalls, teardownCalls int) {
 	return c.commandCalls, c.setupCalls, c.teardownCalls
 }
 
-func (c *mockCmdFull) setError(mockCommandError error, mockSetupError error, mockTeardownError error) {
+func (c *mockCmdFull) setError(mockCommandError, mockSetupError, mockTeardownError error) {
 	c.mockCommandError = mockCommandError
 	c.mockSetupError = mockSetupError
 	c.mockTeardownError = mockTeardownError
