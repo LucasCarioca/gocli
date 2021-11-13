@@ -46,8 +46,8 @@ func Test_app(t *testing.T) {
 		app.Run()
 		commandCalls, setupCalls, teardownCalls = fullCmd.getCalls()
 		assert.Equalf(t, 1, commandCalls, "Should have executed default command")
-		assert.Equalf(t, 1, commandCalls, "Should have executed setup")
-		assert.Equalf(t, 1, commandCalls, "Should have executed teardown")
+		assert.Equalf(t, 1, setupCalls, "Should have executed setup")
+		assert.Equalf(t, 1, teardownCalls, "Should have executed teardown")
 	})
 
 	t.Run("Should throw an error in the setup", func(t *testing.T) {
