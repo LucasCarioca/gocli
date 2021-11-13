@@ -48,8 +48,28 @@ func (a *App) Run() error {
 	if len(os.Args) > 1 {
 		cmd, ok := a.commands[os.Args[1]]
 		if ok {
-			return cmd.Run()
+			s, ok := cmd.(CommandSetup)
+			if ok {
+				err := s.Setup()
+				if err != nil {
+					return err
+				}
+			}
+
+			err := cmd.Run()
+			if err != nil {
+				return err
+			}
+
+			t, ok := cmd.(CommandTeardown)
+			if ok {
+				err := t.Teardown()
+				if err != nil {
+					return err
+				}
+			}
 		}
+		return nil
 	}
 
 	cmd, ok := a.commands["default"]

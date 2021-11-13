@@ -195,14 +195,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
       
       
       
@@ -216,6 +214,84 @@
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Commands
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        General
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/command-type/" class="md-nav__link">
+        Command type
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/functional-commands/" class="md-nav__link">
+        Functional commands
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Life cycle hooks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Life cycle hooks" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Life cycle hooks
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -249,83 +325,7 @@
   
   
     <li class="md-nav__item">
-      <a href="command-type/" class="md-nav__link">
-        Command type
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="functional-commands/" class="md-nav__link">
-        Functional commands
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_3">
-          Life cycle hooks
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Life cycle hooks" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
-          <span class="md-nav__icon md-icon"></span>
-          Life cycle hooks
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../life-cycle-hooks/" class="md-nav__link">
-        General
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../life-cycle-hooks/setup-and-teardown/" class="md-nav__link">
+      <a href="setup-and-teardown/" class="md-nav__link">
         Setup and teardown
       </a>
     </li>
@@ -372,7 +372,8 @@
                 
                 
                 <h1 id="general">General</h1>
-<p>goCLI Commands are very simple and can be implemented in two different ways. The simplest is the functional command approach which is simply mapping a function to a command. The more full featured option is to create an implementation for the <code>Command</code> interface which can be more complex.</p>
+<p>goCLI offers some basic life cycle hooks at the command level. These should help in organizing your code structure in a more flexible way.
+More hooks are planned but at this time we only support setup and teardown hooks for commands.</p>
                 
               
               
@@ -392,7 +393,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home" rel="prev">
+        <a href="../commands/functional-commands/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Functional commands" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -401,20 +402,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Home
+              Functional commands
             </div>
           </div>
         </a>
       
       
         
-        <a href="command-type/" class="md-footer__link md-footer__link--next" aria-label="Next: Command type" rel="next">
+        <a href="setup-and-teardown/" class="md-footer__link md-footer__link--next" aria-label="Next: Setup and teardown" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Command type
+              Setup and teardown
             </div>
           </div>
           <div class="md-footer__button md-icon">
