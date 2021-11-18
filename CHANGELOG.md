@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/LucasCarioca/gocli/compare/v0.4.0...v0.5.0) (2021-11-18)
+
+
+### Features
+
+* adding app ctx to support state ([#22](https://github.com/LucasCarioca/gocli/issues/22)) ([91febad](https://github.com/LucasCarioca/gocli/commit/91febadcb3e0edb7964c7b3efc61361affc11b37))
+
 # [0.4.0](https://github.com/LucasCarioca/gocli/compare/v0.3.1...v0.4.0) (2021-11-13)
 
 
