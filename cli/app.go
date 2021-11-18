@@ -25,7 +25,6 @@ func NewApp(defaultCommand interface{}) AppInterface {
 //App basic structure for managing a cli
 type App struct {
 	commands map[string]Command
-	state    map[string]interface{}
 }
 
 //AddCommand adds a command to the cli with a given command name
