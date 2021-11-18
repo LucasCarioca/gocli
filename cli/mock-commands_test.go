@@ -9,7 +9,7 @@ func newMockCmd() mockCmd {
 	return mockCmd{calls: 0, mockError: nil}
 }
 
-func (c *mockCmd) Run() error {
+func (c *mockCmd) Run(_ AppInterface) error {
 	c.calls = c.calls + 1
 	return c.mockError
 }
@@ -46,17 +46,17 @@ func newMockCmdFull() mockCmdFull {
 	}
 }
 
-func (c *mockCmdFull) Setup() error {
+func (c *mockCmdFull) Setup(_ AppInterface) error {
 	c.setupCalls = c.setupCalls + 1
 	return c.mockSetupError
 }
 
-func (c *mockCmdFull) Teardown() error {
+func (c *mockCmdFull) Teardown(_ AppInterface) error {
 	c.teardownCalls = c.teardownCalls + 1
 	return c.mockTeardownError
 }
 
-func (c *mockCmdFull) Run() error {
+func (c *mockCmdFull) Run(_ AppInterface) error {
 	c.commandCalls = c.commandCalls + 1
 	return c.mockCommandError
 }

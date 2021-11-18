@@ -8,7 +8,7 @@ import (
 type simpleCommand struct{}
 
 //Run command to run
-func (*simpleCommand) Run() error {
+func (*simpleCommand) Run(_ cli.AppInterface) error {
 	fmt.Println("Hello World")
 	return nil
 }

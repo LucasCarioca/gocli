@@ -12,7 +12,7 @@ func Test_version_command(t *testing.T) {
 		cmd := VersionCommand{
 			Version: "v0.0.0",
 		}
-		cmd.Run()
+		cmd.Run(&App{})
 		assert.Equal(t, "Current version: vv0.0.0\n", customOut.(*bytes.Buffer).String(), "Should display the right message")
 
 	})

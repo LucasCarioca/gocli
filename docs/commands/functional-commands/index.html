@@ -415,11 +415,11 @@
                   <h1>Functional commands</h1>
                 
                 <h2 id="functional-commands">Functional Commands</h2>
-<div class="highlight"><pre><span></span><code><span class="kd">type</span> <span class="nx">FunctionalCommand</span> <span class="kd">func</span><span class="p">()</span> <span class="kt">error</span>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span> <span class="nx">FunctionalCommand</span> <span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">AppInterface</span><span class="p">)</span> <span class="kt">error</span>
 </code></pre></div>
 <p>The simplest option is to just create a function and map it to a command in the app. You can do this by declaring the function seperately or passing an inline anonymous function.</p>
 <p>For example we can create a simple function and use it as the default command:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">func</span> <span class="nx">MyFunctionalCommand</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span> <span class="nx">MyFunctionalCommand</span><span class="p">(</span><span class="nx">_</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">AppInterface</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
     <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -430,7 +430,7 @@
 </code></pre></div>
 <p>Or similarly we could pass it in line as an anonymous function:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">app</span> <span class="o">:=</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">NewApp</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+    <span class="nx">app</span> <span class="o">:=</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">NewApp</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">_</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">AppInterface</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
         <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">)</span>
     <span class="p">})</span>
     <span class="nx">app</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
@@ -438,10 +438,10 @@
 </code></pre></div>
 <p>You can also pass as many commands as you want to map:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">app</span> <span class="o">:=</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">NewApp</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+    <span class="nx">app</span> <span class="o">:=</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">NewApp</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">_</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">AppInterface</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
         <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;This is default command&quot;</span><span class="p">)</span>
     <span class="p">})</span>
-    <span class="nx">app</span><span class="p">.</span><span class="nx">AddCommand</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">AddCommand</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">_</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">AppInterface</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
         <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;This is hello command&quot;</span><span class="p">)</span>
     <span class="p">})</span>
     <span class="nx">app</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>

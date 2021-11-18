@@ -5,12 +5,12 @@ import (
 	"github.com/LucasCarioca/gocli/cli"
 )
 
-func functionalCommand() error {
+func functionalCommand(_ cli.AppInterface) error {
 	fmt.Println("This is the default functional command")
 	return nil
 }
 
-func functionalCommand2() error {
+func functionalCommand2(_ cli.AppInterface) error {
 	fmt.Println("This is another functional command")
 	return nil
 }

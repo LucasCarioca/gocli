@@ -2,11 +2,11 @@
 
 ```go
 type CommandSetup interface {
-	Setup() error
+	Setup(ctx AppInterface) error
 }
 
 type CommandTeardown interface {
-	Teardown() error
+	Teardown(ctx AppInterface) error
 }
 ```
 
@@ -22,19 +22,19 @@ For example
 type myCommand struct{}
 
 //Setup function to run before running the command
-func (*myCommand) Setup() error {
+func (*myCommand) Setup(_ cli.AppInterface) error {
 	fmt.Println("Setting up")
 	return nil
 }
 
 //Run command to run
-func (*myCommand) Run() error {
+func (*myCommand) Run(_ cli.AppInterface) error {
 	fmt.Println("Running the command")
 	return nil
 }
 
 //Teardown function to run after running the command
-func (*myCommand) Teardown() error {
+func (*myCommand) Teardown(_ cli.AppInterface) error {
 	fmt.Println("Tearing down")
 	return nil
 }
