@@ -8,7 +8,7 @@ import (
 type defaultCommand struct{}
 
 //Run command to run
-func (*defaultCommand) Run() error {
+func (*defaultCommand) Run(_ cli.AppInterface) error {
 	fmt.Println("This is the default command")
 	return nil
 }

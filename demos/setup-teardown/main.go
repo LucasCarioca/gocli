@@ -8,25 +8,25 @@ import (
 type myCommand struct{}
 
 //Setup function to run before running the command
-func (*myCommand) Setup() error {
+func (*myCommand) Setup(_ cli.AppInterface) error {
 	fmt.Println("Setting up")
 	return nil
 }
 
 //Run command to run
-func (*myCommand) Run() error {
+func (*myCommand) Run(_ cli.AppInterface) error {
 	fmt.Println("Running the command")
 	return nil
 }
 
 //Teardown function to run after running the command
-func (*myCommand) Teardown() error {
+func (*myCommand) Teardown(_ cli.AppInterface) error {
 	fmt.Println("Tearing down")
 	return nil
 }
 
 func main() {
-	app := cli.NewApp(func() error {
+	app := cli.NewApp(func(_ cli.AppInterface) error {
 		fmt.Println("default command")
 		return nil
 	})
