@@ -416,11 +416,11 @@
                 
                 <h2 id="setup-and-teardown">Setup and Teardown</h2>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span> <span class="nx">CommandSetup</span> <span class="kd">interface</span> <span class="p">{</span>
-    <span class="nx">Setup</span><span class="p">()</span> <span class="kt">error</span>
+    <span class="nx">Setup</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">AppInterface</span><span class="p">)</span> <span class="kt">error</span>
 <span class="p">}</span>
 
 <span class="kd">type</span> <span class="nx">CommandTeardown</span> <span class="kd">interface</span> <span class="p">{</span>
-    <span class="nx">Teardown</span><span class="p">()</span> <span class="kt">error</span>
+    <span class="nx">Teardown</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">AppInterface</span><span class="p">)</span> <span class="kt">error</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>If you would like to organize your command into steps you can also use the provided <code>CommandSetup</code> and <code>CommandTeardown</code> types.
@@ -430,19 +430,19 @@ If you command conforms to these interfaces you can add functions to be executed
 <div class="highlight"><pre><span></span><code><span class="kd">type</span> <span class="nx">myCommand</span> <span class="kd">struct</span><span class="p">{}</span>
 
 <span class="c1">//Setup function to run before running the command</span>
-<span class="kd">func</span> <span class="p">(</span><span class="o">*</span><span class="nx">myCommand</span><span class="p">)</span> <span class="nx">Setup</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+<span class="kd">func</span> <span class="p">(</span><span class="o">*</span><span class="nx">myCommand</span><span class="p">)</span> <span class="nx">Setup</span><span class="p">(</span><span class="nx">_</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">AppInterface</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
     <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Setting up&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">nil</span>
 <span class="p">}</span>
 
 <span class="c1">//Run command to run</span>
-<span class="kd">func</span> <span class="p">(</span><span class="o">*</span><span class="nx">myCommand</span><span class="p">)</span> <span class="nx">Run</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+<span class="kd">func</span> <span class="p">(</span><span class="o">*</span><span class="nx">myCommand</span><span class="p">)</span> <span class="nx">Run</span><span class="p">(</span><span class="nx">_</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">AppInterface</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
     <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Running the command&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">nil</span>
 <span class="p">}</span>
 
 <span class="c1">//Teardown function to run after running the command</span>
-<span class="kd">func</span> <span class="p">(</span><span class="o">*</span><span class="nx">myCommand</span><span class="p">)</span> <span class="nx">Teardown</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+<span class="kd">func</span> <span class="p">(</span><span class="o">*</span><span class="nx">myCommand</span><span class="p">)</span> <span class="nx">Teardown</span><span class="p">(</span><span class="nx">_</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">AppInterface</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
     <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Tearing down&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">nil</span>
 <span class="p">}</span>

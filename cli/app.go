@@ -25,6 +25,7 @@ func NewApp(defaultCommand interface{}) AppInterface {
 //App basic structure for managing a cli
 type App struct {
 	commands map[string]Command
+	state map[string]interface{}
 }
 
 //AddCommand adds a command to the cli with a given command name
@@ -36,7 +37,7 @@ func (a *App) AddCommand(name string, command interface{}) {
 	switch c := command.(type) {
 	case Command:
 		a.commands[name] = c
-	case func() error:
+	case func(ctx AppInterface) error:
 		a.commands[name] = &FunctionalCommandWrapper{c}
 	}
 }
@@ -52,7 +53,7 @@ func (a *App) Run() error {
 
 	s, ok := cmd.(CommandSetup)
 	if ok {
-		err := s.Setup()
+		err := s.Setup(a)
 		if err != nil {
 			return err
 		}
@@ -60,7 +61,7 @@ func (a *App) Run() error {
 
 	c, ok := cmd.(Command)
 	if ok {
-		err := c.Run()
+		err := c.Run(a)
 		if err != nil {
 			return err
 		}
@@ -68,7 +69,7 @@ func (a *App) Run() error {
 
 	t, ok := cmd.(CommandTeardown)
 	if ok {
-		err := t.Teardown()
+		err := t.Teardown(a)
 		if err != nil {
 			return err
 		}

@@ -20,7 +20,7 @@ package main
 import "github.com/LucasCarioca/gocli/cli"
 
 func main() {
-    app := cli.NewApp(func() error {
+    app := cli.NewApp(func(_ cli.AppInterface) error {
         fmt.Println("Hello world")    	
     })
     app.Run()

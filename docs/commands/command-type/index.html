@@ -416,14 +416,14 @@
                 
                 <h2 id="command-type">Command Type</h2>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span> <span class="nx">Command</span> <span class="kd">interface</span> <span class="p">{</span>
-    <span class="nx">Run</span><span class="p">()</span> <span class="kt">error</span>
+    <span class="nx">Run</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">AppInterface</span><span class="p">)</span> <span class="kt">error</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>To implement the <code>Command</code> interface you need to create a struct with a public <code>Run</code> function that returns an <code>error</code>.</p>
 <p>For example:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span> <span class="nx">ExampleCommand</span> <span class="kd">struct</span><span class="p">{}</span>
 
-<span class="kd">func</span> <span class="p">(</span><span class="o">*</span><span class="nx">ExampleCommand</span><span class="p">)</span> <span class="nx">Run</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+<span class="kd">func</span> <span class="p">(</span><span class="o">*</span><span class="nx">ExampleCommand</span><span class="p">)</span> <span class="nx">Run</span><span class="p">(</span><span class="nx">_</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">AppInterface</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
     <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;This is the default command&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">nil</span>
 <span class="p">}</span>
@@ -448,7 +448,7 @@
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">ExampleCommand</span><span class="p">)</span> <span class="nx">Run</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">ExampleCommand</span><span class="p">)</span> <span class="nx">Run</span><span class="p">(</span><span class="nx">_</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">AppInterface</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
     <span class="nx">options</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">getOptions</span><span class="p">()</span>
     <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">greet</span> <span class="p">{</span>
         <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Hello World&quot;</span><span class="p">)</span>

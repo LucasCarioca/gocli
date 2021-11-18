@@ -431,7 +431,7 @@ A simple and lightweight cli framework for go applications. Get your cli setup i
 <span class="kn">import</span> <span class="s">&quot;github.com/LucasCarioca/gocli/cli&quot;</span>
 
 <span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">app</span> <span class="o">:=</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">NewApp</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+    <span class="nx">app</span> <span class="o">:=</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">NewApp</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">_</span> <span class="nx">cli</span><span class="p">.</span><span class="nx">AppInterface</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
         <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">)</span>      
     <span class="p">})</span>
     <span class="nx">app</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>

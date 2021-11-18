@@ -90,8 +90,8 @@ func Test_app(t *testing.T) {
 	})
 
 	t.Run("Should support functional commands", func(t *testing.T) {
-		functionalCommand := func() error {
-			cmd.Run()
+		functionalCommand := func(_ AppInterface) error {
+			cmd.Run(&App{})
 			return nil
 		}
 		app := NewApp(functionalCommand)

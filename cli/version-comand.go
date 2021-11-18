@@ -16,7 +16,7 @@ type VersionCommand struct {
 }
 
 //Run executes the command
-func (c *VersionCommand) Run() error {
+func (c *VersionCommand) Run(_ AppInterface) error {
 	fmt.Fprintf(customOut, "Current version: v%s\n", c.Version)
 	return nil
 }

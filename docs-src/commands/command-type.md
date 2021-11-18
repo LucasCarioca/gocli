@@ -2,7 +2,7 @@
 
 ```go
 type Command interface {
-	Run() error
+	Run(ctx AppInterface) error
 }
 ```
 
@@ -13,7 +13,7 @@ For example:
 ```go
 type ExampleCommand struct{}
 
-func (*ExampleCommand) Run() error {
+func (*ExampleCommand) Run(_ cli.AppInterface) error {
 	fmt.Println("This is the default command")
 	return nil
 }
@@ -41,7 +41,7 @@ func (c *ExampleCommand) getOptions() *options {
 	}
 }
 
-func (c *ExampleCommand) Run() error {
+func (c *ExampleCommand) Run(_ cli.AppInterface) error {
 	options := c.getOptions()
     if options.greet {
         fmt.Println("Hello World")
